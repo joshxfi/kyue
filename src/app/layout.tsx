@@ -1,4 +1,5 @@
 import "./globals.css";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Navbar } from "@/components";
 import { Inter } from "next/font/google";
@@ -17,9 +18,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} relative min-h-screen bg-[#0f0f0f]`}>
         <Navbar />
         {children}
+
+        <Image
+          priority
+          fill
+          sizes="100vw"
+          src="/images/grid-bg.png"
+          className="object-cover pointer-events-none"
+          alt="grid background"
+        />
       </body>
     </html>
   );
