@@ -31,7 +31,7 @@ export default function RootLayout({
           fill
           sizes="100vw"
           src="/images/grid-bg.png"
-          className="object-cover pointer-events-none"
+          className="object-cover pointer-events-none opacity-70 absolute -z-10"
           alt="grid background"
         />
       </body>

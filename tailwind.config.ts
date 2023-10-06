@@ -8,9 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: {
+          100: "#0038FF",
+        },
+      },
       fontFamily: {
         bosch: ["Bosch", "serif"],
-        space: ["Space Grotesk", "sans-serif"],
+        grotesk: ["Space Grotesk", "sans-serif"],
       },
     },
   },
