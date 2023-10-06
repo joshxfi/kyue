@@ -18,9 +18,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} relative min-h-screen bg-[#0f0f0f]`}>
-        <Navbar />
-        {children}
+      <body
+        className={`${inter.className} relative min-h-screen text-zinc-200 bg-[#0f0f0f]`}
+      >
+        <div className="px-24 container mx-auto">
+          <Navbar />
+          {children}
+        </div>
 
         <Image
           priority
