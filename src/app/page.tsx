@@ -1,4 +1,4 @@
-import { Testimonial } from "@/components";
+import { Testimonials } from "@/components";
 
 export default function Home() {
   return (
@@ -34,27 +34,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="lg:mt-40 mt-32 flex space-x-12 overflow-x-scroll lg:px-24 px-8 hide-scrollbar">
-        <Testimonial
-          name="John Doe"
-          content="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus magnam aut et provident blanditiis deserunt ipsa dolore pariatur ad nulla consectetur, qui quasi impedit, fugiat cupiditate veritatis, facilis porro esse."
-        />
-
-        <Testimonial
-          name="Jane Bravo"
-          content="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus magnam aut et provident blanditiis deserunt ipsa dolore pariatur ad nulla consectetur, qui quasi impedit, fugiat cupiditate veritatis, facilis porro esse."
-        />
-
-        <Testimonial
-          name="Jerry Tom"
-          content="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus magnam aut et provident blanditiis deserunt ipsa dolore pariatur ad nulla consectetur, qui quasi impedit, fugiat cupiditate veritatis, facilis porro esse."
-        />
-
-        <Testimonial
-          name="Jerry Tom"
-          content="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus magnam aut et provident blanditiis deserunt ipsa dolore pariatur ad nulla consectetur, qui quasi impedit, fugiat cupiditate veritatis, facilis porro esse."
-        />
-      </div>
+      <Testimonials />
     </main>
   );
 }
