@@ -21,7 +21,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} relative min-h-screen text-zinc-200 bg-[#0f0f0f]`}
       >
-        <div className="px-24 container mx-auto">
+        <div className="mx-auto">
           <Navbar />
           {children}
         </div>
