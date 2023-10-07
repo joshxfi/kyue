@@ -49,7 +49,7 @@ export const footerItems = {
 
 export const Footer = () => {
   return (
-    <footer className="contain py-12 px-24">
+    <footer className="contain py-12 lg:px-24 px-8">
       <div className="line mb-12" />
 
       <div className="grid grid-cols-2 flex-wrap justify-between gap-y-16 sm:flex md:text-lg">

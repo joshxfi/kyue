@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export function Navbar() {
   return (
-    <nav className="flex justify-between items-center py-12 mx-auto px-24">
+    <nav className="flex justify-between items-center py-12 mx-auto lg:px-24 px-8">
       <Image
         priority
         height={120}
@@ -12,7 +12,7 @@ export function Navbar() {
         alt="logo"
       />
 
-      <ul className="flex space-x-24 text-zinc-300 uppercase font-light text-sm">
+      <ul className="lg:flex space-x-24 text-zinc-300 uppercase font-light text-sm hidden">
         <li>About</li>
         <li>Services</li>
         <li>Contact</li>
