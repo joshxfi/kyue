@@ -15,6 +15,23 @@ export const footerItems = {
   ],
   withUrl: [
     {
+      name: "Kyue App",
+      children: [
+        {
+          name: "FAQ",
+          href: "#",
+        },
+        {
+          name: "Feedback",
+          href: "#",
+        },
+        {
+          name: "Download",
+          href: "#",
+        },
+      ],
+    },
+    {
       name: "Socials",
       children: [
         {
@@ -84,14 +101,6 @@ export const Footer = () => {
             ))}
           </ul>
         ))}
-
-        <Image
-          height={120}
-          width={120}
-          className="object-contain"
-          src="/images/kyue-logo.png"
-          alt="logo"
-        />
       </div>
 
       <div className="mt-20 flex flex-col items-center md:items-start">
