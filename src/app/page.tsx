@@ -17,7 +17,7 @@ export default function Home() {
           queues more convenient and enjoyable for everyone involved
         </p>
 
-        <div className="flex space-x-3 lg:mt-14 mt-8 lg:text-xl">
+        <div className="flex space-x-3 lg:mt-14 mt-8 lg:text-xl md:text-base text-sm">
           <button
             type="button"
             className="rounded-md bg-white lg:px-8 lg:py-4 px-6 py-3 font-medium text-zinc-800"
