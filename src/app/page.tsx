@@ -39,20 +39,20 @@ export default function Home() {
       <Testimonials />
       <Companies />
 
-      <section className="flex justify-center items-start lg:px-24 px-8 mt-52 space-x-12">
-        <div className="mt-40 text-right flex flex-col items-end">
-          <h1 className="lg:text-5xl md:text-4xl sm:text-2xl text-xl uppercase text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-500 tracking-widest font-grotesk">
+      <section className="flex flex-col md:flex-row justify-center md:items-start items-center lg:px-24 px-8 md:mt-52 lg:space-x-12 space-x-8">
+        <div className="mt-40 md:text-right text-center flex flex-col md:items-end items-center mb-8 lg:mb-0">
+          <h1 className="xl:text-5xl lg:4xl sm:text-3xl text-2xl uppercase text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-500 tracking-widest font-grotesk">
             Elevate your
             <br />
             Queueing Experience
           </h1>
-          <p className="max-w-[600px] mt-4 text-lg text-zinc-300">
+          <p className="max-w-[500px] mt-4 md:text-lg sm:text-base text-sm text-zinc-300">
             Seamlessly join queues remotely, receive real-time updates, and
             transform your wait into a productive and enjoyable experience
           </p>
           <a
             href="#"
-            className="text-primary-200 mt-2 hover:underline transition-all"
+            className="text-primary-200 mt-2 text-sm sm:text-base hover:underline transition-all"
           >
             Download Kyue &rarr;
           </a>
@@ -61,7 +61,7 @@ export default function Home() {
         <Image
           width={1920}
           height={1080}
-          className="object-contain w-96 pointer-events-none"
+          className="object-contain lg:w-96 w-64"
           src="/images/phone.png"
           alt="phone"
         />
