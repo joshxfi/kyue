@@ -26,7 +26,7 @@ export default function RootLayout({
           width={1920}
           height={1080}
           src="/images/gradient.png"
-          className="object-cover pointer-events-none opacity-40 absolute -z-10 top-0"
+          className="object-cover pointer-events-none opacity-30 absolute -z-10 md:-top-12 -top-6"
           alt="grid background"
         />
 
