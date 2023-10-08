@@ -38,10 +38,28 @@ export default function RootLayout({
 
         <Image
           priority
-          fill
-          sizes="100vw"
+          width={1920}
+          height={1080}
           src="/images/grid-bg.png"
-          className="object-cover pointer-events-none opacity-30 absolute -z-10"
+          className="object-cover pointer-events-none opacity-30 absolute -z-10 top-0"
+          alt="grid background"
+        />
+
+        <Image
+          priority
+          width={1920}
+          height={1080}
+          src="/images/grid-bg.png"
+          className="object-cover pointer-events-none opacity-30 absolute -z-10 bottom-0 -scale-y-100"
+          alt="grid background"
+        />
+
+        <Image
+          priority
+          width={1920}
+          height={1080}
+          src="/images/gradient.png"
+          className="object-cover pointer-events-none opacity-10 absolute -z-10 -scale-y-100 bottom-0"
           alt="grid background"
         />
       </body>
