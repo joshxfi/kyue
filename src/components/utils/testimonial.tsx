@@ -24,7 +24,7 @@ export function Testimonial({ name, content, position, imgUrl }: Props) {
         </div>
       </div>
 
-      <div className="mt-4">"{content}"</div>
+      <div className="mt-4">&quot;{content}&quot;</div>
     </div>
   );
 }
