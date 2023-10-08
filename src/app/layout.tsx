@@ -27,23 +27,32 @@ export default function RootLayout({
           height={1080}
           src="/images/gradient.png"
           className="object-cover pointer-events-none opacity-30 absolute -z-10 md:-top-12 -top-6"
-          alt="grid background"
+          alt="gradient"
         />
+        <div className="absolute top-0 -z-10 flex flex-col">
+          <Image
+            priority
+            width={1920}
+            height={1080}
+            src="/images/grid-bg.png"
+            className="object-cover pointer-events-none opacity-30"
+            alt="grid background"
+          />
+          <Image
+            priority
+            width={1920}
+            height={1080}
+            src="/images/grid-bg.png"
+            className="object-cover pointer-events-none opacity-30 -scale-y-100 -mt-56"
+            alt="grid background"
+          />
+        </div>
 
         <div className="mx-auto">
           <Navbar />
           {children}
           <Footer />
         </div>
-
-        <Image
-          priority
-          width={1920}
-          height={1080}
-          src="/images/grid-bg.png"
-          className="object-cover pointer-events-none opacity-30 absolute -z-10 top-0"
-          alt="grid background"
-        />
 
         <Image
           priority
