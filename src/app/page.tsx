@@ -37,9 +37,17 @@ export default function Home() {
       </div>
 
       <Testimonials />
+      <Image
+        priority
+        width={1920}
+        height={1080}
+        src="/images/grid-bg.png"
+        className="object-cover pointer-events-none opacity-30 absolute -z-10 -scale-y-100 lg:hidden"
+        alt="grid background"
+      />
       <Companies />
 
-      <section className="flex flex-col md:flex-row justify-center md:items-start items-center lg:px-24 px-8 md:mt-52 lg:space-x-12 space-x-8">
+      <section className="flex flex-col md:flex-row justify-center md:items-start items-center lg:px-24 px-8 md:mt-52 lg:space-x-12 md:space-x-8">
         <div className="mt-40 md:text-right text-center flex flex-col md:items-end items-center mb-8 lg:mb-0">
           <h1 className="xl:text-5xl lg:4xl sm:text-3xl text-2xl uppercase text-transparent bg-clip-text bg-gradient-to-b from-white to-zinc-500 tracking-widest font-grotesk">
             Elevate your
@@ -58,13 +66,23 @@ export default function Home() {
           </a>
         </div>
 
-        <Image
-          width={1920}
-          height={1080}
-          className="object-contain lg:w-96 w-64"
-          src="/images/phone.png"
-          alt="phone"
-        />
+        <div className="relative pointer-events-none">
+          <Image
+            width={1920}
+            height={1080}
+            className="object-contain lg:w-96 w-64"
+            src="/images/phone.png"
+            alt="phone"
+          />
+
+          <Image
+            width={1920}
+            height={1080}
+            className="object-contain hidden md:block absolute top-0 mt-56 xl:-left-52 lg:-left-48 -left-32 -z-10 opacity-40 rotate-90"
+            src="/images/gradient.png"
+            alt="gradient"
+          />
+        </div>
       </section>
     </main>
   );
