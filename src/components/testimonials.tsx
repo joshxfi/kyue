@@ -1,8 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { useDraggable } from "react-use-draggable-scroll";
-
+import Marquee from "react-fast-marquee";
 import { Testimonial } from "./utils";
 
 const data = [
@@ -49,19 +47,11 @@ const data = [
 ];
 
 export function Testimonials() {
-  const ref =
-    useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
-  const { events } = useDraggable(ref);
-
   return (
-    <div
-      ref={ref}
-      {...events}
-      className="lg:mt-40 mt-32 flex space-x-12 overflow-x-scroll lg:px-24 px-8 hide-scrollbar"
-    >
+    <Marquee className="lg:mt-52 mt-40">
       {data.map((testimonial) => (
         <Testimonial key={testimonial.name} {...testimonial} />
       ))}
-    </div>
+    </Marquee>
   );
 }
