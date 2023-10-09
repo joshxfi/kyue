@@ -1,7 +1,6 @@
 import "./globals.css";
 import Image from "next/image";
 import type { Metadata } from "next";
-import { Footer, Navbar } from "@/components";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -39,9 +38,7 @@ export default function RootLayout({
         />
 
         <div className="mx-auto">
-          <Navbar />
           {children}
-          <Footer />
         </div>
 
         <Image
