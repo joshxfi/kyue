@@ -1,5 +1,5 @@
-import { Card, Icons } from "@/components/utils";
 import Link from "next/link";
+import { Card, Icons } from "@/components/utils";
 
 const orgs = [
   {

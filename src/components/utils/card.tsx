@@ -21,7 +21,7 @@ export function Card({ imgUrl, heading, subheading }: Props) {
 
       <div>
         <h3 className="text-lg">{heading}</h3>
-        <p className="text-zinc-500">{subheading}</p>
+        <p className="text-zinc-400">{subheading}</p>
       </div>
     </div>
   );
