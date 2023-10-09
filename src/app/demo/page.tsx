@@ -1,4 +1,5 @@
 import { Card, Icons } from "@/components/utils";
+import Link from "next/link";
 
 const orgs = [
   {
@@ -27,12 +28,9 @@ export default function Demo() {
   return (
     <div className="max-w-screen-sm mx-auto min-h-screen px-8 pt-16 font-grotesk">
       <div className="relative flex items-center justify-center">
-        <button
-          type="button"
-          className="text-3xl text-primary-200 absolute left-0"
-        >
+        <Link href="/" className="text-3xl text-primary-200 absolute left-0">
           <Icons.arrowLeft />
-        </button>
+        </Link>
         <p className="font-grotesk text-lg">Select Organization</p>
       </div>
 
