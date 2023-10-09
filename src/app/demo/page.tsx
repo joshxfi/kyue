@@ -26,7 +26,7 @@ const orgs = [
 
 export default function Demo() {
   return (
-    <div className="max-w-screen-sm mx-auto min-h-screen px-8 pt-16 font-grotesk">
+    <div className="max-w-screen-sm mx-auto px-8 pt-16 font-grotesk">
       <div className="relative flex items-center justify-center">
         <Link href="/" className="text-3xl text-primary-200 absolute left-0">
           <Icons.arrowLeft />
@@ -45,16 +45,17 @@ export default function Demo() {
 
       <div className="mt-8 space-y-4">
         {orgs.map((org) => (
-          <div
+          <Link
+            href="/demo/scan"
             key={org.imgUrl}
-            className="hover:scale-105 transition-all cursor-pointer"
+            className="hover:scale-105 transition-all cursor-pointer block"
           >
             <Card
               heading={org.heading}
               subheading={org.subheading}
               imgUrl={org.imgUrl}
             />
-          </div>
+          </Link>
         ))}
       </div>
     </div>

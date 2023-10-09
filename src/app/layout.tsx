@@ -2,6 +2,7 @@ import "./globals.css";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} relative min-h-screen text-zinc-200 bg-[#0f0f0f]`}
       >
+        <Toaster />
         <Image
           priority
           width={1920}
@@ -37,9 +39,7 @@ export default function RootLayout({
           alt="grid background"
         />
 
-        <div className="mx-auto">
-          {children}
-        </div>
+        <div className="mx-auto">{children}</div>
 
         <Image
           priority
