@@ -64,7 +64,7 @@ export default function Scan() {
           </button>
         </div>
       )}
-      <div id="reader" className="w-[600px]"></div>
+      <div id="reader" className="max-w-[600px] w-full"></div>
     </div>
   );
 }
