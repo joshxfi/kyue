@@ -25,6 +25,7 @@ export default function Scan() {
               {
                 fps: 30,
                 qrbox: { width: 250, height: 250 },
+                aspectRatio: 1,
               },
               (decodedText) => {
                 html5QrCode
@@ -49,9 +50,9 @@ export default function Scan() {
   }, []);
 
   return (
-    <div className="pt-24 flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center min-h-screen">
       {!hasPerms && (
-        <div className="h-[450px] w-[600px] flex flex-col items-center justify-center space-y-8 border border-secondary-100 rounded-xl bg-black">
+        <div className="h-auto max-w-[600px] w-full flex flex-col items-center justify-center space-y-8 rounded-xl">
           <Icons.qrcode className="text-7xl" />
 
           <button

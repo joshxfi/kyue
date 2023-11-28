@@ -5,7 +5,24 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <main>
+    <main className="relative">
+      <Image
+        priority
+        width={1920}
+        height={1080}
+        src="/images/gradient.png"
+        className="object-cover pointer-events-none opacity-30 absolute -z-10 md:-top-12 -top-6"
+        alt="gradient"
+      />
+
+      <Image
+        priority
+        width={1920}
+        height={1080}
+        src="/images/grid-bg.png"
+        className="object-cover pointer-events-none opacity-30 absolute top-0 -z-10 flex flex-col"
+        alt="grid background"
+      />
       <Navbar />
       <div className="pb-24 lg:mt-32 mt-12">
         <div className="px-8 flex flex-col items-center text-center">
@@ -89,6 +106,24 @@ export default function Home() {
         </section>
       </div>
       <Footer />
+
+      <Image
+        priority
+        width={1920}
+        height={1080}
+        src="/images/grid-bg.png"
+        className="object-cover pointer-events-none opacity-30 absolute -z-10 bottom-0 -scale-y-100"
+        alt="grid background"
+      />
+
+      <Image
+        priority
+        width={1920}
+        height={1080}
+        src="/images/gradient.png"
+        className="object-cover pointer-events-none opacity-10 absolute -z-10 -scale-y-100 bottom-0"
+        alt="grid background"
+      />
     </main>
   );
 }
