@@ -3,30 +3,14 @@
 import { toast } from "sonner";
 import { Html5Qrcode } from "html5-qrcode";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 import { Icons } from "@/components/utils";
+import { isMobile } from "react-device-detect";
 
 export default function Scan() {
   const router = useRouter();
   const [hasPerms, setHasPerms] = useState(false);
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mobileMediaQuery = window.matchMedia("(max-width: 767px)"); // Adjust the breakpoint as needed
-
-    const handleMobileChange = (event: any) => {
-      setIsMobile(event.matches);
-    };
-
-    mobileMediaQuery.addEventListener("change", handleMobileChange);
-    setIsMobile(mobileMediaQuery.matches);
-
-    return () => {
-      mobileMediaQuery.removeEventListener("change", handleMobileChange);
-    };
-  }, []);
 
   const scanQrCode = useCallback(() => {
     Html5Qrcode.getCameras()
