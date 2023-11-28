@@ -1,14 +1,32 @@
 "use client";
 
-import { Icons } from "@/components/utils";
-import { Html5Qrcode } from "html5-qrcode";
-import Link from "next/link";
-import { useCallback, useState } from "react";
 import { toast } from "sonner";
+import { Html5Qrcode } from "html5-qrcode";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+
+import { Icons } from "@/components/utils";
 
 export default function Scan() {
+  const router = useRouter();
   const [hasPerms, setHasPerms] = useState(false);
-  const [decoded, setDecoded] = useState("");
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mobileMediaQuery = window.matchMedia("(max-width: 767px)"); // Adjust the breakpoint as needed
+
+    const handleMobileChange = (event: any) => {
+      setIsMobile(event.matches);
+    };
+
+    mobileMediaQuery.addEventListener("change", handleMobileChange);
+    setIsMobile(mobileMediaQuery.matches);
+
+    return () => {
+      mobileMediaQuery.removeEventListener("change", handleMobileChange);
+    };
+  }, []);
 
   const scanQrCode = useCallback(() => {
     Html5Qrcode.getCameras()
@@ -16,16 +34,23 @@ export default function Scan() {
         if (devices && devices.length) {
           const cameraId = devices[0].id;
           setHasPerms(true);
-          const html5QrCode = new Html5Qrcode("reader");
+          const html5QrCode = new Html5Qrcode("reader", true);
           html5QrCode
             .start(
-              cameraId,
+              isMobile ? { facingMode: { exact: "environment" } } : cameraId,
               {
                 fps: 30,
                 qrbox: { width: 250, height: 250 },
               },
               (decodedText) => {
-                setDecoded(decodedText);
+                html5QrCode
+                  .stop()
+                  .then(() => {})
+                  .catch((err: any) => {
+                    toast.error(err.message);
+                  });
+
+                router.push(`/demo/status/${decodedText}`);
               },
               (_) => {}
             )
@@ -38,10 +63,11 @@ export default function Scan() {
         toast.error(err.message);
       });
   }, []);
+
   return (
     <div className="pt-24 flex flex-col justify-center items-center">
       {!hasPerms && (
-        <div className="h-[450px] w-[600px] flex flex-col items-center justify-center space-y-8 border border-secondary-100 rounded-xl">
+        <div className="h-[450px] w-[600px] flex flex-col items-center justify-center space-y-8 border border-secondary-100 rounded-xl bg-black">
           <Icons.qrcode className="text-7xl" />
 
           <button
@@ -54,17 +80,6 @@ export default function Scan() {
         </div>
       )}
       <div id="reader" className="w-[600px]"></div>
-
-      <p className="mt-8 mb-4">{decoded}</p>
-
-      {decoded && (
-        <Link
-          href={`/demo/status/${decoded}`}
-          className="rounded-md bg-zinc-900 text-white border border-zinc-800 lg:px-8 lg:py-4 px-6 py-3 font-medium"
-        >
-          Join Queue
-        </Link>
-      )}
     </div>
   );
 }
