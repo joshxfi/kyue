@@ -41,14 +41,14 @@ export default function Home() {
 
           <div className="flex space-x-3 lg:mt-14 mt-8 lg:text-xl md:text-base text-sm">
             <Link
-              href="/demo"
+              href="/queue"
               className="rounded-md bg-white lg:px-8 lg:py-4 px-6 py-3 font-medium text-zinc-800"
             >
               Get Started
             </Link>
 
             <Link
-              href="/demo"
+              href="/queue"
               className="rounded-md bg-zinc-900 text-white border border-zinc-800 lg:px-8 lg:py-4 px-6 py-3 font-medium"
             >
               Download App

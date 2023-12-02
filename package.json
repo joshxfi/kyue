@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "nanoid": "^5.0.4",
     "next": "14.0.3",
     "react": "^18",
     "react-device-detect": "^2.2.3",
