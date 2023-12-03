@@ -1,7 +1,6 @@
 "use client";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Card, Icons, Button } from "@/components/utils";
+import { Card, Button, QueueContainer } from "@/components/utils";
 
 const queues = [
   {
@@ -25,14 +24,7 @@ export default function Status() {
   const queueId = searchParams.get("id");
 
   return (
-    <div className="max-w-screen-sm mx-auto px-8 pt-16 font-grotesk pb-24 flex flex-col">
-      <div className="relative flex items-center justify-center">
-        <Link href="/" className="text-3xl text-primary-200 absolute left-0">
-          <Icons.arrowLeft />
-        </Link>
-        <p className="font-grotesk text-lg">Current Status</p>
-      </div>
-
+    <QueueContainer title="Current Status">
       <div className="bg-secondary-200 rounded-xl mt-12 p-12 text-center">
         <h1 className="text-4xl mb-4">{queueId}</h1>
         <p className="text-zinc-400">{orgId}</p>
@@ -53,6 +45,6 @@ export default function Status() {
       <Button dark action="/demo">
         Cancel Queue
       </Button>
-    </div>
+    </QueueContainer>
   );
 }

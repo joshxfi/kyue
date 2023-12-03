@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Card, Icons } from "@/components/utils";
+import { Card, Icons, QueueContainer } from "@/components/utils";
 
 const orgs = [
   {
@@ -26,14 +26,7 @@ const orgs = [
 
 export default function Queue() {
   return (
-    <div className="max-w-screen-sm mx-auto px-8 pt-16 font-grotesk">
-      <div className="relative flex items-center justify-center">
-        <Link href="/" className="text-3xl text-primary-200 absolute left-0">
-          <Icons.arrowLeft />
-        </Link>
-        <p className="font-grotesk text-lg">Select Organization</p>
-      </div>
-
+    <QueueContainer title="Select Organization">
       <div className="flex items-center bg-secondary-200 rounded-xl mt-12 px-6 py-3">
         <Icons.search className="w-6 h-6" />
         <input
@@ -58,6 +51,6 @@ export default function Queue() {
           </Link>
         ))}
       </div>
-    </div>
+    </QueueContainer>
   );
 }

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { isMobile } from "react-device-detect";
 
-import { Icons, Button } from "@/components/utils";
+import { Icons, Button, QueueContainer } from "@/components/utils";
 
 export default function Scan() {
   const router = useRouter();
@@ -50,17 +50,19 @@ export default function Scan() {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen">
-      {!hasPerms && (
-        <div className="h-auto max-w-[600px] w-full flex flex-col items-center justify-center space-y-8 rounded-xl">
-          <Icons.qrcode className="text-7xl" />
+    <QueueContainer title="Scan a QR Code">
+      <div className="mt-52">
+        {!hasPerms && (
+          <div className="h-auto max-w-[600px] w-full flex flex-col items-center justify-center space-y-8 rounded-xl">
+            <Icons.qrcode className="text-7xl" />
 
-          <Button type="button" action={scanQrCode}>
-            Request Camera Access
-          </Button>
-        </div>
-      )}
-      <div id="reader" className="max-w-[600px] w-full"></div>
-    </div>
+            <Button type="button" action={scanQrCode}>
+              Request Camera Access
+            </Button>
+          </div>
+        )}
+        <div id="reader" className="max-w-[600px] w-full"></div>
+      </div>
+    </QueueContainer>
   );
 }
