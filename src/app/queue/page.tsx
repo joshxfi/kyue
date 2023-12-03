@@ -1,7 +1,8 @@
-"use client"
+"use client";
 
-import Link from "next/link";
-import { Card, Icons, QueueContainer } from "@/components/utils";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Card, Icons, Modal, QueueContainer } from "@/components/utils";
 
 const orgs = [
   {
@@ -27,8 +28,26 @@ const orgs = [
 ];
 
 export default function Queue() {
+  const router = useRouter();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedOrg, setSelectedOrg] = useState("");
+
   return (
     <QueueContainer title="Select Organization">
+      <Modal
+        isOpen={modalOpen}
+        title="Get in Queue"
+        description="How would you like to proceed?"
+        onClose={() => setModalOpen(false)}
+        handleConfirm={[
+          {
+            text: "Student Account",
+            fn: () => router.push(`/queue/${selectedOrg}`),
+          },
+          { text: "Cashier", fn: () => router.push(`/queue/${selectedOrg}`) },
+        ]}
+      />
+
       <div className="flex items-center bg-secondary-200 rounded-xl mt-12 px-6 py-3">
         <Icons.search className="w-6 h-6" />
         <input
@@ -40,17 +59,20 @@ export default function Queue() {
 
       <div className="mt-8 space-y-4">
         {orgs.map((org) => (
-          <Link
-            href={`/queue/${org.orgId}`}
+          <button
+            onClick={() => {
+              setModalOpen(true);
+              setSelectedOrg(org.orgId);
+            }}
             key={org.imgUrl}
-            className="hover:scale-105 transition-all cursor-pointer block"
+            className="hover:scale-105 transition-all cursor-pointer w-full text-left"
           >
             <Card
               heading={org.orgId.toUpperCase()}
               subheading={org.subheading}
               imgUrl={org.imgUrl}
             />
-          </Link>
+          </button>
         ))}
       </div>
     </QueueContainer>
