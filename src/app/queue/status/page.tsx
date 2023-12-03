@@ -42,9 +42,11 @@ export default function Status() {
         ))}
       </div>
 
-      <Button dark action="/demo">
-        Cancel Queue
-      </Button>
+      <div className="mt-8">
+        <Button dark action="/">
+          Cancel Queue
+        </Button>
+      </div>
     </QueueContainer>
   );
 }
