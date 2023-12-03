@@ -15,9 +15,9 @@ export function QrCode({ orgId }: { orgId: string }) {
           maxWidth: "100%",
           width: "100%",
         }}
-        value={`${window.location.origin}/queue/status?org=${orgId}&id=${nanoid(
-          12
-        )}`}
+        value={`${
+          typeof window !== "undefined" && window.location.origin
+        }/queue/status?org=${orgId}&id=${nanoid(12)}`}
         viewBox={`0 0 250 250`}
       />
     </div>
