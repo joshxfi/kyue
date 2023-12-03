@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import { Icons } from "@/components/utils";
 import { QrCode } from "@/components/qrCode";
