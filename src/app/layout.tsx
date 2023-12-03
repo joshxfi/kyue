@@ -1,7 +1,8 @@
 import "./globals.css";
+import { Toaster } from "sonner";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Toaster } from "sonner";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
         className={`${inter.className} relative min-h-screen text-zinc-200 bg-[#0f0f0f]`}
       >
         <Toaster />
+        <NextTopLoader showSpinner={false} />
         <div className="mx-auto">{children}</div>
       </body>
     </html>
