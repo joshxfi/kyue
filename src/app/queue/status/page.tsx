@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Card, Icons } from "@/components/utils";
+import { Card, Icons, Button } from "@/components/utils";
 
 const queues = [
   {
@@ -50,12 +50,9 @@ export default function Status() {
         ))}
       </div>
 
-      <Link
-        href="/demo"
-        className="rounded-md bg-zinc-900 text-white border border-zinc-800 lg:px-8 lg:py-4 px-6 py-3 font-medium inline-block mt-8 self-end"
-      >
+      <Button dark action="/demo">
         Cancel Queue
-      </Link>
+      </Button>
     </div>
   );
 }
