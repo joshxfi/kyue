@@ -6,13 +6,13 @@ type Props = {
   handleConfirm: {
     text: string;
     fn: () => void;
-  };
+  }[];
   title: string;
   description: string;
   onClose: () => void;
 };
 
-export default function MyModal({
+export function Modal({
   isOpen,
   handleConfirm,
   title,
@@ -56,14 +56,17 @@ export default function MyModal({
                   <p className="text-sm text-gray-500">{description}</p>
                 </div>
 
-                <div className="mt-4">
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-purple-100 px-4 py-2 text-sm font-medium text-purple-900 hover:bg-purple-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2"
-                    onClick={handleConfirm.fn}
-                  >
-                    {handleConfirm.text}
-                  </button>
+                <div className="mt-4 space-x-2">
+                  {handleConfirm.map((h) => (
+                    <button
+                      key={h.text}
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={h.fn}
+                    >
+                      {h.text}
+                    </button>
+                  ))}
                 </div>
               </Dialog.Panel>
             </Transition.Child>

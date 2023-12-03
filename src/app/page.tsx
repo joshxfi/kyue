@@ -1,10 +1,27 @@
+"use client";
+
 import Image from "next/image";
-import { Subtitle, Button } from "@/components/utils";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Subtitle, Button, Modal } from "@/components/utils";
 import { Companies, Footer, Navbar, Testimonials } from "@/components";
 
 export default function Home() {
+  const router = useRouter();
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <main className="relative">
+      <Modal
+        isOpen={modalOpen}
+        title="Kyue"
+        description="How would you like to proceed?"
+        onClose={() => setModalOpen(false)}
+        handleConfirm={[
+          { text: "Generate", fn: () => router.push("/queue") },
+          { text: "Scan QR", fn: () => router.push("/queue/scan") },
+        ]}
+      />
       <Image
         priority
         width={1920}
@@ -39,7 +56,7 @@ export default function Home() {
           </p>
 
           <div className="flex space-x-3 lg:mt-14 mt-8 lg:text-xl md:text-base text-sm">
-            <Button action="/queue/scan">Get Started</Button>
+            <Button action={() => setModalOpen(true)}>Get Started</Button>
             <Button dark action="/queue/scan">
               Download App
             </Button>
