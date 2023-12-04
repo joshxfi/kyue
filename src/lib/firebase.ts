@@ -1,6 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { Analytics, getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore";
+
+// eslint-disable-next-line import/no-mutable-exports
+let analytics: Analytics;
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -13,6 +17,12 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
-export { analytics }
+const db = getFirestore(app);
+analytics = getAnalytics(app);
+
+if (typeof window !== 'undefined') {
+  analytics = getAnalytics(app);
+}
+
+export { db, analytics }

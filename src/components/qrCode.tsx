@@ -1,9 +1,8 @@
 "use client";
 
-import { nanoid } from "nanoid";
 import QRCode from "react-qr-code";
 
-export function QrCode({ orgId }: { orgId: string }) {
+export function QrCode({ value }: { value: string }) {
   return (
     <div className="h-auto mx-auto max-w-[250px] w-full p-6 bg-white rounded-xl">
       <QRCode
@@ -15,9 +14,7 @@ export function QrCode({ orgId }: { orgId: string }) {
           maxWidth: "100%",
           width: "100%",
         }}
-        value={`${
-          typeof window !== "undefined" && window.location.origin
-        }/queue/status?org=${orgId}&id=${nanoid(12)}`}
+        value={value}
         viewBox={`0 0 250 250`}
       />
     </div>

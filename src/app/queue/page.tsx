@@ -36,15 +36,15 @@ export default function Queue() {
     <QueueContainer title="Select Organization">
       <Modal
         isOpen={modalOpen}
-        title="Get in Queue"
+        title="Kyue"
         description="How would you like to proceed?"
         onClose={() => setModalOpen(false)}
         handleConfirm={[
           {
-            text: "Student Account",
-            fn: () => router.push(`/queue/${selectedOrg}`),
+            text: "Cashier",
+            fn: () => router.push(`/cashier`),
           },
-          { text: "Cashier", fn: () => router.push(`/queue/${selectedOrg}`) },
+          { text: "Queue", fn: () => router.push(`/queue/${selectedOrg}`) },
         ]}
       />
 
