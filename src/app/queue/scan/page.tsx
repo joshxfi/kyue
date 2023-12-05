@@ -47,7 +47,7 @@ export default function Scan() {
       .catch((err) => {
         toast.error(err.message);
       });
-  }, []);
+  }, [router]);
 
   return (
     <QueueContainer title="Scan a QR Code">

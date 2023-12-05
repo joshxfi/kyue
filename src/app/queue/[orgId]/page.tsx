@@ -36,10 +36,10 @@ export default function Queue({ params }: { params: { orgId: string } }) {
   const { isScanned } = (value?.data() as QueueData) ?? {};
 
   useEffect(() => {
-    if (value?.exists() && isScanned) {
+    if (isScanned) {
       setScannedModal(true);
     }
-  }, [value?.data()]);
+  }, [isScanned]);
 
   return (
     <QueueContainer title="Scan to Join Queue">
