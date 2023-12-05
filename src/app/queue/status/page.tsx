@@ -1,6 +1,9 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { Card, Button, QueueContainer } from "@/components/utils";
+import { useEffect } from "react";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
 const queues = [
   {
@@ -22,6 +25,16 @@ export default function Status() {
 
   const orgId = searchParams.get("org");
   const queueId = searchParams.get("id");
+
+  useEffect(() => {
+    if (queueId) {
+      (async () => {
+        await updateDoc(doc(db, "queue", queueId), {
+          isScanned: true,
+        });
+      })();
+    }
+  }, [queueId]);
 
   return (
     <QueueContainer title="Current Status">
