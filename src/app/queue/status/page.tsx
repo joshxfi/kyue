@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
@@ -16,7 +17,6 @@ import { db } from "@/lib/firebase";
 import { QueueData } from "@/types";
 import { Loader } from "@/components";
 import { Card, Button, QueueContainer, Modal } from "@/components/utils";
-import { toast } from "sonner";
 
 export default function Status() {
   const router = useRouter();
@@ -85,6 +85,7 @@ export default function Status() {
             </div>
 
             <div className="h-2 mt-3 bg-primary-200 rounded-full w-[60%]"></div>
+
             <p className="text-sm text-zinc-400 italic mt-2">
               Estimated time: 13 mins left
             </p>
@@ -112,9 +113,12 @@ export default function Status() {
               </>
             )}
 
-              <Button className="mt-8 w-full font-normal" action={() => setModalOpen(true)}>
-                Cancel Queue
-              </Button>
+            <Button
+              className="mt-8 w-full font-normal"
+              action={() => setModalOpen(true)}
+            >
+              Cancel Queue
+            </Button>
           </>
         )}
       </div>
