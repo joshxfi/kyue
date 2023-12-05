@@ -48,13 +48,15 @@ export default function Queue({ params }: { params: { orgId: string } }) {
     });
 
     try {
-      await setDoc(doc(db, "queue", qId), {
+      const payload: Omit<QueueData, "id"> = {
         name,
         orgId: params.orgId,
         queueNumber: latestQueue + 1,
         timestamp: serverTimestamp(),
-        isScanned: false,
-      });
+        status: "fresh",
+      };
+
+      await setDoc(doc(db, "queue", qId), payload);
     } catch (e: any) {
       toast.error(e.message);
     }
@@ -70,14 +72,14 @@ export default function Queue({ params }: { params: { orgId: string } }) {
   };
 
   const [value, loading] = useDocument(doc(db, "queue", queueId));
-  const { isScanned } = (value?.data() as QueueData) ?? {};
+  const { status } = (value?.data() as QueueData) ?? {};
 
   useEffect(() => {
-    if (isScanned) {
+    if (status === "scanned") {
       setName("");
       setScannedModal(true);
     }
-  }, [isScanned]);
+  }, [status]);
 
   return (
     <QueueContainer title="Generate QR Code">
@@ -111,7 +113,7 @@ export default function Queue({ params }: { params: { orgId: string } }) {
       <div className="pt-32 flex flex-col justify-center items-center">
         {loading ? (
           <Loader className="h-12 w-12" />
-        ) : value?.exists() && !isScanned ? (
+        ) : value?.exists() && status === "fresh" ? (
           <div>
             <QrCode
               value={`${

@@ -4,5 +4,5 @@ export type QueueData = {
   orgId: string;
   timestamp: any;
   queueNumber: number;
-  isScanned: boolean;
+  status: "fresh" | "scanned" | "serving" | "stale";
 };

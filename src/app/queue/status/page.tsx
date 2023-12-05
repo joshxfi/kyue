@@ -31,17 +31,17 @@ export default function Status() {
   const queueId = searchParams.get("id");
 
   const [value, loading] = useDocument(doc(db, "queue", queueId ?? "default"));
-  const { name, queueNumber, isScanned } = (value?.data() as QueueData) ?? {};
+  const { name, queueNumber, status } = (value?.data() as QueueData) ?? {};
 
   useEffect(() => {
-    if (queueId && !isScanned) {
+    if (queueId && status === "fresh") {
       (async () => {
         await updateDoc(doc(db, "queue", queueId), {
-          isScanned: true,
+          status: "scanned",
         });
       })();
     }
-  }, [queueId, isScanned]);
+  }, [queueId, status]);
 
   return (
     <QueueContainer title="Current Status">
