@@ -4,13 +4,22 @@ import { toast } from "sonner";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import { useDocument } from "react-firebase-hooks/firestore";
-import { deleteDoc, doc, serverTimestamp, setDoc } from "firebase/firestore";
+import {
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+  serverTimestamp,
+  setDoc,
+} from "firebase/firestore";
 
 import { db } from "@/lib/firebase";
 import { QueueData } from "@/types";
-import { QrCode } from "@/components/qrCode";
+import { Loader, QrCode } from "@/components";
 import { Button, Modal, QueueContainer } from "@/components/utils";
-import { Loader } from "@/components";
 
 export default function Queue({ params }: { params: { orgId: string } }) {
   const [name, setName] = useState("");
@@ -23,10 +32,26 @@ export default function Queue({ params }: { params: { orgId: string } }) {
     setQueueId(qId);
     setModalOpen(false);
 
+    const q = query(
+      collection(db, "queue"),
+      orderBy("timestamp", "desc"),
+      limit(1)
+    );
+
+    let latestQueue = 0;
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      if (doc.exists()) {
+        latestQueue = doc.data().queueNumber;
+      }
+    });
+
     try {
       await setDoc(doc(db, "queue", qId), {
         name,
         orgId: params.orgId,
+        queueNumber: latestQueue + 1,
         timestamp: serverTimestamp(),
         isScanned: false,
       });

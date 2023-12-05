@@ -5,4 +5,4 @@ export * from "./button";
 export * from "./subtitle";
 export * from "./modal-btn";
 export * from "./testimonial";
-export * from "./queueContainer";
+export * from "./queue-container";

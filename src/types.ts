@@ -3,5 +3,6 @@ export type QueueData = {
   name: string;
   orgId: string;
   timestamp: any;
+  queueNumber: number;
   isScanned: boolean;
 };
