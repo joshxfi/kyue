@@ -42,7 +42,7 @@ export default function Queue() {
         handleConfirm={[
           {
             text: "Cashier",
-            fn: () => router.push(`/cashier`),
+            fn: () => router.push(`/queue/cashier`),
           },
           { text: "Queue", fn: () => router.push(`/queue/${selectedOrg}`) },
         ]}
