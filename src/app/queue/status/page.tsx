@@ -1,7 +1,7 @@
 "use client";
 
 import { toast } from "sonner";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   collection,
@@ -23,6 +23,7 @@ export default function Status() {
   const searchParams = useSearchParams();
   const queueId = searchParams.get("id") ?? "";
   const [modalOpen, setModalOpen] = useState(false);
+  const [turnModal, setTurnModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const [value, loading] = useDocument(doc(db, "queue", queueId));
@@ -45,7 +46,7 @@ export default function Status() {
 
   useEffect(() => {
     if (!loading && !value?.exists()) {
-      toast.error("Queue does not exist.");
+      toast.error("Transaction completed.");
       router.push("/queue/scan");
       return;
     }
@@ -58,6 +59,17 @@ export default function Status() {
       })();
     }
   }, [queueId, status, loading, value?.exists]);
+
+  const isBeingServed = useMemo(
+    () => serving?.docs.find((doc) => doc.id === queueId)?.exists(),
+    [serving]
+  );
+
+  useEffect(() => {
+    if (isBeingServed) {
+      setTurnModal(true);
+    }
+  }, [isBeingServed]);
 
   return (
     <QueueContainer title="Current Status">
@@ -74,12 +86,29 @@ export default function Status() {
         ]}
       />
 
+      <Modal
+        isOpen={turnModal}
+        title="It's your turn"
+        description="Please proceed to the corresponding cashier."
+        onClose={() => setTurnModal(false)}
+        handleConfirm={[
+          {
+            text: "Understood",
+            fn: () => setTurnModal(false),
+          },
+        ]}
+      />
+
       <div className="min-h-screen">
         {loading || isLoading ? (
           <Loader className="h-12 w-12 mt-32 mx-auto" />
         ) : (
           <>
-            <div className="bg-secondary-200 rounded-xl mt-12 p-12 text-center">
+            <div
+              className={`bg-secondary-200 rounded-xl mt-12 p-12 text-center ${
+                isBeingServed ? "border border-primary-200" : ""
+              }`}
+            >
               <h1 className="text-4xl mb-4">{queueNumber}</h1>
               <p className="text-zinc-400">{name}</p>
             </div>
@@ -101,6 +130,9 @@ export default function Status() {
 
                     return (
                       <Card
+                        className={
+                          doc.id === queueId ? "border border-primary-200" : ""
+                        }
                         key={doc.id}
                         heading={`${data.queueNumber.toString()} (${
                           data.name

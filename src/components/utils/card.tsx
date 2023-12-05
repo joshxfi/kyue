@@ -1,14 +1,21 @@
 import Image from "next/image";
+import { twMerge } from "tailwind-merge";
 
 type Props = {
   imgUrl?: string;
   heading: string;
+  className?: string;
   subheading: React.ReactNode;
 };
 
-export function Card({ imgUrl, heading, subheading }: Props) {
+export function Card({ imgUrl, heading, className, subheading }: Props) {
   return (
-    <div className="bg-secondary-200 p-6 rounded-xl border border-secondary-100 flex items-center space-x-4">
+    <div
+      className={twMerge(
+        "bg-secondary-200 p-6 rounded-xl border border-secondary-100 flex items-center space-x-4",
+        className
+      )}
+    >
       {imgUrl && (
         <Image
           src={imgUrl}
