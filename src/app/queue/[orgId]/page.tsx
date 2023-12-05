@@ -4,16 +4,17 @@ import { toast } from "sonner";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import { useDocument } from "react-firebase-hooks/firestore";
-import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { deleteDoc, doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 import { db } from "@/lib/firebase";
 import { QueueData } from "@/types";
 import { QrCode } from "@/components/qrCode";
 import { Button, Modal, QueueContainer } from "@/components/utils";
+import { Loader } from "@/components";
 
 export default function Queue({ params }: { params: { orgId: string } }) {
   const [name, setName] = useState("");
-  const [queueId, setQueueId] = useState("none");
+  const [queueId, setQueueId] = useState("default");
   const [modalOpen, setModalOpen] = useState(false);
   const [scannedModal, setScannedModal] = useState(false);
 
@@ -34,11 +35,21 @@ export default function Queue({ params }: { params: { orgId: string } }) {
     }
   };
 
-  const [value] = useDocument(doc(db, "queue", queueId));
+  const handleCancel = async () => {
+    try {
+      setName("");
+      await deleteDoc(doc(db, "queue", queueId));
+    } catch (e: any) {
+      toast.error(e.message);
+    }
+  };
+
+  const [value, loading] = useDocument(doc(db, "queue", queueId));
   const { isScanned } = (value?.data() as QueueData) ?? {};
 
   useEffect(() => {
     if (isScanned) {
+      setName("");
       setScannedModal(true);
     }
   }, [isScanned]);
@@ -73,7 +84,26 @@ export default function Queue({ params }: { params: { orgId: string } }) {
       />
 
       <div className="pt-32 flex flex-col justify-center items-center">
-        {isScanned || queueId === "none" ? (
+        {loading ? (
+          <Loader className="h-12 w-12" />
+        ) : value?.exists() && !isScanned ? (
+          <div>
+            <QrCode
+              value={`${
+                typeof window !== "undefined" && window.location.origin
+              }/queue/status?org=${params.orgId}&id=${queueId}`}
+            />
+
+            <Button
+              dark
+              type="button"
+              className="mt-4 font-normal w-full"
+              action={handleCancel}
+            >
+              Cancel Queue
+            </Button>
+          </div>
+        ) : (
           <div className="space-y-2 flex flex-col">
             <input
               type="text"
@@ -95,23 +125,6 @@ export default function Queue({ params }: { params: { orgId: string } }) {
               }}
             >
               Generate QR Code
-            </Button>
-          </div>
-        ) : (
-          <div>
-            <QrCode
-              value={`${
-                typeof window !== "undefined" && window.location.origin
-              }/queue/status?org=${params.orgId}&id=${queueId}`}
-            />
-
-            <Button
-              dark
-              type="button"
-              className="mt-4 font-normal w-full"
-              action={() => setQueueId("none")}
-            >
-              Cancel Queue
             </Button>
           </div>
         )}
