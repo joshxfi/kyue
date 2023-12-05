@@ -12,6 +12,7 @@ import { QrCode } from "@/components/qrCode";
 import { Button, Modal, QueueContainer } from "@/components/utils";
 
 export default function Queue({ params }: { params: { orgId: string } }) {
+  const [name, setName] = useState("");
   const [queueId, setQueueId] = useState("none");
   const [modalOpen, setModalOpen] = useState(false);
   const [scannedModal, setScannedModal] = useState(false);
@@ -23,6 +24,7 @@ export default function Queue({ params }: { params: { orgId: string } }) {
 
     try {
       await setDoc(doc(db, "queue", qId), {
+        name,
         orgId: params.orgId,
         timestamp: serverTimestamp(),
         isScanned: false,
@@ -42,11 +44,11 @@ export default function Queue({ params }: { params: { orgId: string } }) {
   }, [isScanned]);
 
   return (
-    <QueueContainer title="Scan to Join Queue">
+    <QueueContainer title="Generate QR Code">
       <Modal
         isOpen={modalOpen}
         title="Get in Queue"
-        description="How would you like to proceed?"
+        description={`Hello ${name}, how would you like to proceed?`}
         onClose={() => setModalOpen(false)}
         handleConfirm={[
           {
@@ -72,9 +74,29 @@ export default function Queue({ params }: { params: { orgId: string } }) {
 
       <div className="pt-32 flex flex-col justify-center items-center">
         {isScanned || queueId === "none" ? (
-          <Button dark type="button" action={() => setModalOpen(true)}>
-            Generate QR Code
-          </Button>
+          <div className="space-y-2 flex flex-col">
+            <input
+              type="text"
+              value={name}
+              maxLength={7}
+              onChange={(e) => setName(e.target.value)}
+              className="px-6 py-3 outline-none bg-secondary-200 border border-secondary-100 rounded"
+              placeholder="Enter your name"
+            />
+
+            <Button
+              type="button"
+              action={() => {
+                if (!name) {
+                  toast.error("Please enter your name.");
+                } else {
+                  setModalOpen(true);
+                }
+              }}
+            >
+              Generate QR Code
+            </Button>
+          </div>
         ) : (
           <div>
             <QrCode
@@ -84,9 +106,9 @@ export default function Queue({ params }: { params: { orgId: string } }) {
             />
 
             <Button
-              className="mt-8 grid place-items-center"
               dark
               type="button"
+              className="mt-4 font-normal w-full"
               action={() => setQueueId("none")}
             >
               Cancel Queue
