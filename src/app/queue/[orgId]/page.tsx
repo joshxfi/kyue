@@ -7,9 +7,9 @@ import { useDocument } from "react-firebase-hooks/firestore";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 import { db } from "@/lib/firebase";
+import { QueueData } from "@/types";
 import { QrCode } from "@/components/qrCode";
 import { Button, Modal, QueueContainer } from "@/components/utils";
-import { QueueData } from "@/types";
 
 export default function Queue({ params }: { params: { orgId: string } }) {
   const [queueId, setQueueId] = useState("none");
